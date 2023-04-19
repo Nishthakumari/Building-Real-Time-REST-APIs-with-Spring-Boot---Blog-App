@@ -28,7 +28,7 @@ public class PostServiceImpl implements PostService {
 
         PostDto postResponse = mapToDto(newPost);
 
-        return postDto;
+        return postResponse;
     }
 
     @Override
@@ -57,13 +57,19 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public void deletePostById(long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+        postRepository.delete(post);
+    }
+
     private PostDto mapToDto(Post post)
     {
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
         postDto.setTitle(post.getTitle());
-        postDto.setDescription(postDto.getDescription());
-        postDto.setContent(postDto.getContent());
+        postDto.setDescription(post.getDescription());
+        postDto.setContent(post.getContent());
 
         return postDto;
     }
@@ -73,7 +79,7 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
-        post.setContent(post.getContent());
+        post.setContent(postDto.getContent());
 
         return post;
     }
