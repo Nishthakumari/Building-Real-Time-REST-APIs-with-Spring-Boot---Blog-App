@@ -1,4 +1,4 @@
-package com.springboot.blog.springbootblogrestapi.controller;
+package com.springboot.blog.springbootblogrestapi.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
