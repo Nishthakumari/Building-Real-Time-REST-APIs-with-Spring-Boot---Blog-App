@@ -25,9 +25,11 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDto> getAllPosts()
-    {
-        return postService.getAllPosts();
+    public List<PostDto> getAllPosts(
+            @RequestParam (value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ){
+        return postService.getAllPosts(pageNo, pageSize);
     }
 
     @GetMapping("/{id}")
@@ -44,7 +46,7 @@ public class PostController {
     }
 
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePost(@PathVariable (name = "id") long id)
     {
         postService.deletePostById(id);
