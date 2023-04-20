@@ -10,17 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Entity
-@Table(
-        name = "comments"
-)
+@Table(name = "comments")
 public class Comment {
 
     @Id
-    @GeneratedValue(
-        strategy =    GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
 
     private String name;
     private String email;
@@ -29,5 +24,4 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
 }
