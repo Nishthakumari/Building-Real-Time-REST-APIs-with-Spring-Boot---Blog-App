@@ -17,41 +17,44 @@ public class PostController {
         this.postService = postService;
     }
 
-
+    // create blog post rest api
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
     }
 
+    // get all posts rest api
     @GetMapping
     public PostResponse getAllPosts(
-            @RequestParam (value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
-            @RequestParam( value = "sortBy", defaultValue = "id", required = false) String sortBy,
+            @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir
     ){
         return postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
 
+    // get post by id
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id)
-    {
+    public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id){
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
+    // update post by id rest api
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable(name = "id") long id)
-    {
+    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable(name = "id") long id){
+
         PostDto postResponse = postService.updatePost(postDto, id);
+
         return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
 
-
+    // delete post rest api
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePost(@PathVariable (name = "id") long id)
-    {
+    public ResponseEntity<String> deletePost(@PathVariable(name = "id") long id){
+
         postService.deletePostById(id);
 
-        return new ResponseEntity<>("Post Entity Deleted Successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
     }
 }
