@@ -5,9 +5,10 @@ import com.springboot.blog.springbootblogrestapi.payload.CategoryDto;
 import java.util.List;
 
 public interface CategoryService {
-    public CategoryDto addCategory(CategoryDto categoryDto);
-    public CategoryDto getCategory(Long categoryId);
-    public List<CategoryDto> getAllCategory();
+     CategoryDto addCategory(CategoryDto categoryDto);
+     CategoryDto getCategory(Long categoryId);
+     List<CategoryDto> getAllCategory();
+     CategoryDto updateCategory(CategoryDto categoryDto, Long categoryId);
 
 
 
